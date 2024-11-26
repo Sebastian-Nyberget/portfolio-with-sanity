@@ -7,6 +7,26 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 import { Form } from "../components/form";
+import prisma from "../lib/db";
+
+async function getGuestBookEntry() {
+  const data = await prisma.guestBookEntry.findMany({
+    select: {
+      User: {
+        select: {
+          firstname: true,
+          profileimage: true,
+        },
+      },
+      message: true,
+      id: true,
+    },
+    orderBy: {
+        createdAt: "desc",
+    },
+    take: 30,
+  });
+}
 
 export default function GuestbookPage() {
   return (
