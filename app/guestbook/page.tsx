@@ -11,7 +11,8 @@ export default function GuestbookPage() {
 
       <Card className="mt-10">
         <CardHeader className="flex flex-col w-full">
-          <Label>Message</Label>
+          <Label className="mb-1">Message</Label>
+          <GuestbookForm />
         </CardHeader>
       </Card>
     </section>
