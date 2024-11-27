@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
@@ -8,6 +9,8 @@ import { Label } from "@/components/ui/label";
 
 import { Form } from "../components/form";
 import prisma from "../lib/db";
+import { Suspense } from "react";
+import { GuestbookFormLoading, LoadingMessages } from "../components/LoadingState";
 
 async function getGuestBookEntry() {
   const data = await prisma.guestBookEntry.findMany({
@@ -26,6 +29,8 @@ async function getGuestBookEntry() {
     },
     take: 30,
   });
+
+  return data;
 }
 
 export default function GuestbookPage() {
@@ -37,11 +42,42 @@ export default function GuestbookPage() {
       <Card className="mt-10">
         <CardHeader className="flex flex-col w-full">
           <Label className="mb-1">Message</Label>
-          <GuestbookForm />
+          <Suspense fallback={<GuestbookFormLoading />}>
+            <GuestbookForm />
+          </Suspense>
+
+          <ul className="p-7 gap-y-5 flex flex-col">
+            <Suspense fallback={<LoadingMessages />}>
+              <GuestBookEntries />
+            </Suspense>
+          </ul>
         </CardHeader>
       </Card>
     </section>
   );
+}
+
+async function GuestBookEntries() {
+  const data = await getGuestBookEntry();
+
+  if (data.length === 0) {
+    return null;
+  }
+
+  return data.map((item) => (
+    <li key={item.id}>
+      <div className="flex items-center">
+        <img 
+          src={item.User?.profileimage ?? ''}
+          alt="User Profile Image" 
+          className="w-10 h-10 rounded-lg" 
+        />
+        <p className="text-muted-foreground pl-3 break-words">
+          {item.User?.firstname}: <span className="text-foreground">{item.message}</span>
+        </p>
+      </div>
+    </li>
+  ))
 }
 
 async function GuestbookForm() {

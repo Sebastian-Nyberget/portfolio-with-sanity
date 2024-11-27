@@ -7,11 +7,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 import { postData } from "../actions";
+import { useRef } from "react";
 
 export function Form() {
+  const formRef = useRef<HTMLFormElement>(null);
+
   return (
-    <form 
-      action={postData} 
+    <form
+      ref={formRef}
+      action={async (formData) =>  {
+        await postData(formData);
+        formRef.current?.reset();
+      }} 
       className="flex justify-between gap-4 flex-col md:flex-row"
     >
       <Input 

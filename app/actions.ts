@@ -2,6 +2,7 @@
 
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import prisma from "./lib/db";
+import { revalidatePath } from "next/cache";
 
 export async function postData(formData: FormData) {
   const {getUser} = getKindeServerSession();
@@ -19,4 +20,6 @@ export async function postData(formData: FormData) {
       message: message,
     },
   });
+
+  revalidatePath("/guestbook");
 }
