@@ -15,11 +15,15 @@ async function getData() {
 
   const data = await client.fetch(query);
 
+  console.log(data)
+
   return data;
 }
 
 export default async function ProjectsPage() {
   const data: ProjectsCard[] = await getData();
+
+  
 
   return (
     <section className="max-w-7xl w-full px-4 md:px-8 mx-auto">
