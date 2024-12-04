@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { unstable_noStore as noStore } from "next/cache";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
@@ -13,6 +14,7 @@ import { Suspense } from "react";
 import { GuestbookFormLoading, LoadingMessages } from "../components/LoadingState";
 
 async function getGuestBookEntry() {
+  noStore();
   const data = await prisma.guestBookEntry.findMany({
     select: {
       User: {
