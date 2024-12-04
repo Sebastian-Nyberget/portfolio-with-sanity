@@ -13,7 +13,8 @@ export async function postData(formData: FormData) {
   }
   
   const message = formData.get("message") as string;
-
+  
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const data = await prisma.guestBookEntry.create({
     data: {
       userId: user.id,
