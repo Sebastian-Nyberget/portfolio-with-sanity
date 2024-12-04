@@ -5,7 +5,7 @@ import { navigationItems } from "./navbar";
 
 export function Footer() {
   return (
-    <footer>
+    <footer className="my-12">
       <ul className="flex flex-wrap justify-center">
         {navigationItems.map((item, index) => (
           <div key={index} className="px-5 py-2">
@@ -14,7 +14,9 @@ export function Footer() {
             </Link>
           </div>
         ))}
-      </ul>     
+      </ul>
+
+      <p className="mt-2 text-center text-muted-foreground">&copy; 2024 Sebastian Nyberget </p>
     </footer>
   )
 }

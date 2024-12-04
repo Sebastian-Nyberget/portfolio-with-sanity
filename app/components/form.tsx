@@ -40,12 +40,12 @@ function SubmitButton() {
   return (
     <>
       {pending ? (
-        <Button disabled>
+        <Button disabled className="w-full">
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
           Please wait
         </Button>
       ): (
-        <Button type="submit">Sign for free</Button>
+        <Button className="w-full" type="submit">Sign for free</Button>
       )}  
     </>
   )
