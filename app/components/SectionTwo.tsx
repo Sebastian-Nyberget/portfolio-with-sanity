@@ -7,7 +7,7 @@ import {
   RiNextjsFill,
   RiTailwindCssFill 
 } from "react-icons/ri";
-import { FaReact, FaGithub, FaFigma, FaDocker, FaHtml5, FaFacebook, FaLinkedin } from "react-icons/fa";
+import { FaReact, FaGithub, FaFigma, FaDocker, FaHtml5, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { SiTypescript, SiSanity, SiVercel, SiAppwrite, SiMongodb } from "react-icons/si";
 import { DiMysql } from "react-icons/di";
@@ -32,9 +32,9 @@ const icons = [
 const socialMedia = [
   {
     id: 1,
-    icon: FaFacebook,
-    name: 'Facebook',
-    username: '@seb',
+    icon: FaGithub,
+    name: 'Github',
+    username: 'Sebastian-Nyberget',
     link: 'http://localhost:3000/',
   },
   {
